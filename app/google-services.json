@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "642441005276",
+    "firebase_url": "https://bails-234520.firebaseio.com",
+    "project_id": "bails-234520",
+    "storage_bucket": "bails-234520.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642441005276:android:23dd347ae9ac7269",
+        "android_client_info": {
+          "package_name": "com.asymptote.bails"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642441005276-sthg46dp4mmc5a6h3c88i6i05p2jc52k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.asymptote.bails",
+            "certificate_hash": "a977fd6a61a233c66bc657141fbe22c9347dd248"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsfPhB67jodE_3w4ZeeSnW5j9MaUYWKF8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642441005276-e1kpsudfmlf8a486c45kv34vkkemerho.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
