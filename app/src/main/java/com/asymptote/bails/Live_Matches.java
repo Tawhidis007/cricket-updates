@@ -1,6 +1,10 @@
 package com.asymptote.bails;
 
+import android.content.BroadcastReceiver;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.annotation.NonNull;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +29,8 @@ public class Live_Matches extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     Live_Matches_Adapter live_matches_adapter;
     SwipeRefreshLayout swipeRefreshLayout;
+    LocalBroadcastManager lbr;
+    BroadcastReceiver br;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +38,12 @@ public class Live_Matches extends AppCompatActivity {
         live_matches_rv = findViewById(R.id.live_matches_rv);
         swipeRefreshLayout = findViewById(R.id.swiper);
 
+        lbr = LocalBroadcastManager.getInstance(getApplicationContext());
+        br = new MyReceiver();
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         ref = firebaseDatabase.getReference().child("matches_live");
+
 
         l_model = new ArrayList<>();
         load_data();
@@ -57,6 +67,13 @@ public class Live_Matches extends AppCompatActivity {
             @Override
             public void listener(int position) {
                 Toast.makeText(Live_Matches.this, position+"", Toast.LENGTH_SHORT).show();
+
+                Intent i = new Intent();
+                i.putExtra("custom","jaa");
+                i.putExtra("position",position);
+                i.setAction("custom_hr");
+                i.addCategory("android.intent.category.DEFAULT");
+                lbr.sendBroadcast(i);
             }
         });
     }
@@ -102,5 +119,23 @@ public class Live_Matches extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+    @Override
+    protected void onDestroy() { //onstop e error hoy
+        super.onDestroy();
+
+        //unregisterReceiver(br);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        IntentFilter intentFilter = new IntentFilter("custom_hr");
+        intentFilter.addCategory("android.intent.category.DEFAULT"); // because custom so specifying a default
+        lbr.registerReceiver(br, intentFilter);
+
     }
 }

@@ -18,6 +18,7 @@ public class Live_Matches_Adapter extends RecyclerView.Adapter<Live_Matches_Adap
     Context context;
     ArrayList<Live_model> l_model;
     bridge my_listener;
+    int count = 1;
 
     public Live_Matches_Adapter(Context context, ArrayList<Live_model> l_model) {
         this.context = context;
@@ -51,11 +52,11 @@ public class Live_Matches_Adapter extends RecyclerView.Adapter<Live_Matches_Adap
         TextView live_matches_over_tv = cardView.findViewById(R.id.live_matches_over_tv);
         TextView who_batting_tv = cardView.findViewById(R.id.who_batting_tv);
         CheckBox live_matches_notify_cb = cardView.findViewById(R.id.live_matches_notify_cb);
-        Button match_details_btn = cardView.findViewById(R.id.match_details_btn);
+        final Button match_details_btn = cardView.findViewById(R.id.match_details_btn);
 
         match_name.setText(l_model.get(position).getMatch_name());
-        team_1_name_tv.setText(l_model.get(position).getHome_team_name()+" : ");
-        team_2_name_tv.setText(l_model.get(position).getAway_team_name()+" : ");
+        team_1_name_tv.setText(l_model.get(position).getHome_team_name() + " : ");
+        team_2_name_tv.setText(l_model.get(position).getAway_team_name() + " : ");
         team_1_score_tv.setText(l_model.get(position).getHome_score());
         team_2_score_tv.setText(l_model.get(position).getAway_score());
         who_batting_tv.setText(l_model.get(position).getTeam_batting());
@@ -63,6 +64,13 @@ public class Live_Matches_Adapter extends RecyclerView.Adapter<Live_Matches_Adap
         match_details_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (count % 2 == 0) {
+                    match_details_btn.setText("Get Live Updates");
+                    count = count + 1;
+                } else if (count % 2 != 0) {
+                    match_details_btn.setText("You have now subscribed to this game");
+                    count = count + 1;
+                }
                 if (my_listener != null) {
                     my_listener.listener(position);
                 }
